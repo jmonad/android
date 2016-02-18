@@ -1,2 +1,2 @@
-# androidSeq
-A simple use of Seq on Android
+# Android 
+A simple use of jMonad libraries on Android
