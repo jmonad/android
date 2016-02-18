@@ -1,6 +1,6 @@
 # MonaDroid
 
-[![Build Status](https://travis-ci.org/jmonad/monadroid.svg?branch=master)](https://travis-ci.org/jmonad/monadroid)
+[![Build Status](https://travis-ci.org/jmonad/monaDroid.svg?branch=master)](https://travis-ci.org/jmonad/monaDroid)
 
 A simple use of jMonad libraries on Android.
 
