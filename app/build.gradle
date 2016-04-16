@@ -1,6 +1,16 @@
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 apply plugin: 'checkstyle'
+
+def AAVersion = '4.0.0'
+
+apt {
+  arguments {
+    resourcePackageName android.defaultConfig.applicationId
+    androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+  }
+}
 
 android {
 
@@ -23,7 +33,9 @@ android {
 
 dependencies {
   compile project(':monadroid')
-  compile 'com.android.support:appcompat-v7:23.2.0'
+  compile 'com.android.support:appcompat-v7:23.3.0'
+  apt "org.androidannotations:androidannotations:$AAVersion"
+  compile "org.androidannotations:androidannotations-api:$AAVersion"
 }
 
 retrolambda {
