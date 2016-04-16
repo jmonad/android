@@ -1,4 +1,4 @@
-package com.monadroid;
+package com.monadroid.sampleapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
