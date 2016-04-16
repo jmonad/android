@@ -1,3 +1,4 @@
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
 
@@ -14,19 +15,21 @@ android {
     targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
   }
 
-  sourceSets {
-    main {
-      manifest.srcFile 'AndroidManifest.xml'
-      java.srcDirs = ['src/main/java']
-      res.srcDirs = ['res']
-    }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
-
 }
 
 dependencies {
   compile project(':monadroid')
   compile 'com.android.support:appcompat-v7:23.2.0'
+}
+
+retrolambda {
+  javaVersion JavaVersion.VERSION_1_7
+  defaultMethods false
+  incremental true
 }
 
 task checkstyle(type: Checkstyle) {

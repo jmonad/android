@@ -1,5 +1,14 @@
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'checkstyle'
+
+apt {
+  arguments {
+    resourcePackageName android.defaultConfig.applicationId
+    androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+  }
+}
 
 android {
 
@@ -13,6 +22,16 @@ android {
     targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
   }
 
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
+}
+
+retrolambda {
+  javaVersion JavaVersion.VERSION_1_7
+  defaultMethods false
+  incremental true
 }
 
 dependencies {
