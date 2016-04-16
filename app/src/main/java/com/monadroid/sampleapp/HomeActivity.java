@@ -14,7 +14,7 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_home)
 public class HomeActivity extends AppCompatActivity {
 
-  private static final int test0N = 1000000;
+  private static final int testSamples = 1000000;
 
   @ViewById
   TextView contentText;
@@ -27,15 +27,16 @@ public class HomeActivity extends AppCompatActivity {
   @AfterViews
   protected void afterViews() {
     test0();
+    test1();
   }
 
-  @Background
+  @Background(serial = "Tests")
   protected void test0() {
-    printText("Starting test0");
-    Integer[] integers = new Integer[test0N];
+    printText("Starting Test 0 - Map Function");
+    Integer[] integers = new Integer[testSamples];
 
-    printText("   - Filling " + test0N + " integers to test.");
-    for (int i=0; i < test0N; i++) {
+    printText("   - Filling " + testSamples + " integers to test.");
+    for (int i = 0; i < testSamples; i++) {
       integers[i] = i;
     }
 
@@ -44,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     long endTime;
 
     // Initialization Test
-    printText("   - Starting test 0");
+    printText("   - Starting Test 0");
     Seq<Integer> values = new Seq<>(integers);
     endTime = System.currentTimeMillis();
     totalTime += (endTime - startTime);
@@ -58,7 +59,41 @@ public class HomeActivity extends AppCompatActivity {
     totalTime += (endTime - startTime);
     printText("   - Mapped x -> x * 2 in " + (endTime - startTime) + " ms");
 
-    printText("   - Total operating time: " + totalTime + " ms for test0");
+    printText("   - Total operating time: " + totalTime + " ms for Test 0");
+    printText("\n");
+  }
+
+  @Background(serial = "Tests")
+  protected void test1() {
+    printText("Starting Test 1 - Filter Function");
+    Integer[] integers = new Integer[testSamples];
+
+    printText("   - Filling " + testSamples + " integers to test.");
+    for (int i = 0; i < testSamples; i++) {
+      integers[i] = i % 125;
+    }
+
+    long startTime = System.currentTimeMillis();
+    long totalTime = 0;
+    long endTime;
+
+    // Initialization Test
+    printText("   - Starting Test 1");
+    Seq<Integer> values = new Seq<>(integers);
+    endTime = System.currentTimeMillis();
+    totalTime += (endTime - startTime);
+    printText("   - Created Seq in " + (endTime - startTime) + " ms");
+
+    // Filter Test
+    printText("   - Filtering x > 10 && x < 40");
+    startTime = System.currentTimeMillis();
+    values = values.filter(x -> x > 10 && x < 40);
+    endTime = System.currentTimeMillis();
+    totalTime += (endTime - startTime);
+    printText("   - Filtered x > 10 && x < 40 in " + (endTime - startTime) + " ms");
+
+    printText("   - Total operating time: " + totalTime + " ms for Test 1");
+    printText("\n");
   }
 
 }
